@@ -24,16 +24,16 @@ const cartSlice = createSlice({
                 state.productsValue += action.payload.price * action.payload.quantity;
             }
 
-            if(state.productsValue >= 200) state.discount = state.productsValue * 0.05;
+            if(state.productsValue >= 200) state.discount = Math.round(state.productsValue * 0.05);
 
-            state.shipping = Math.round(state.productsValue * 0.02);
+            state.shipping = Math.round(state.productsValue * 0.05);
             state.total = state.productsValue + state.shipping - state.discount;
         },
         removeProduct: (state, action) => {
             state.products = state.products.filter((x) => x._id !== action.payload._id)
             state.productsValue -= action.payload.price * action.payload.quantity;
             state.quantity -= 1;
-            state.shipping = Math.round(state.productsValue * 0.02);
+            state.shipping = Math.round(state.productsValue * 0.05);
 
             if(state.productsValue < 200) state.discount = 0;
 
@@ -61,10 +61,10 @@ const cartSlice = createSlice({
             }
 
             if(state.productsValue >= 200){
-                state.discount = state.productsValue * 0.05;
+                state.discount = Math.round(state.productsValue * 0.02);
             } else  state.discount = 0;
 
-            state.shipping = Math.round(state.productsValue * 0.02);
+            state.shipping = Math.round(state.productsValue * 0.05);
             state.total = state.productsValue + state.shipping - state.discount;
 
         }
