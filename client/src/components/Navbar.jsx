@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 import {logout} from "../redux/userRedux";
 import LoginIcon from '@mui/icons-material/Login';
 
-
 const Container = styled.div`
   height: 60px;
   background-color: #195128;
