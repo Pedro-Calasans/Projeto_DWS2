@@ -71,7 +71,7 @@ const Register = () => {
         e.preventDefault();
         addUser(inputs, dispatch);
         alert("Conta criada com sucesso!");
-        navigate.push("/");
+        navigate("/");
     }
 
     return (
