@@ -8,8 +8,6 @@ import {Link} from "react-router-dom";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.25)),
-  url(https://static.fabapp.com/613613a94edb00b58ce58fea1e1ced45a83a5775) center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -50,10 +48,6 @@ const Button = styled.button`
     color: green;
     cursor: not-allowed;
   }
-`;
-
-const Error = styled.span`
-  color: red;
 `;
 
 const Login = () => {
