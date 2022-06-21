@@ -8,6 +8,7 @@ import Success from "./pages/Success";
 import {BrowserRouter as Router, Navigate, Route, Routes,} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Whislist from "./pages/Whislist";
+import Search from "./pages/Search"
 
 const App = () => {
     const user = useSelector((state) => state.user.currentUser);
@@ -23,6 +24,7 @@ const App = () => {
                 <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>}></Route>
                 <Route path="/success" element={<Success></Success>}></Route>
                 <Route path="/whislist" element={user ? <Whislist/> : <Navigate to="/login"/>}></Route>
+                <Route path="/search" element={<Search></Search>}></Route>
             </Routes>
         </Router>
     );

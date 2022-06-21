@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import {Badge} from "@material-ui/core";
-import {ExitToApp, FavoriteBorder, Search, ShoppingCartOutlined,} from "@material-ui/icons";
+import {ExitToApp, FavoriteBorder, ShoppingCartOutlined,} from "@material-ui/icons";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../redux/userRedux";
 import LoginIcon from '@mui/icons-material/Login';
 
@@ -79,6 +79,8 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+    const [busca, setBusca] = useState("");
+
     const user = useSelector((state) => state.user.currentUser);
 
     const quantity = useSelector(state => state.cart.quantity)
@@ -87,9 +89,24 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
+
     const handlelogout = () => {
         dispatch(logout())
     }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (busca.trim()) {
+            console.log(busca)
+            navigate("/search", {
+                state: {busca: busca},
+            });
+        } else {
+            navigate("/products");
+        }
+    };
 
     return (
         <Container>
@@ -100,10 +117,17 @@ const Navbar = () => {
                     </Link>
                 </Left>
                 <Center>
-                    <SearchContainer>
-                        <Input placeholder="Procurar"/>
-                        <Search style={{color: "gray", fontSize: "16px"}}/>
-                    </SearchContainer>
+                    <form onSubmit={submitHandler} className="input-group">
+                        <input
+                            type="search"
+                            className="form-control rounded search"
+                            placeholder="Search"
+                            onChange={(e) => setBusca(e.target.value)}
+                        />
+                        <button type="submit" className="search-button">
+                            search
+                        </button>
+                    </form>
                 </Center>
                 <Right>
                     {user ? (
@@ -132,3 +156,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

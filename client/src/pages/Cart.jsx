@@ -188,12 +188,12 @@ function Cart() {
 
     const handleClean = () => {
         dispatch(cleanCart())
-        console.log(2)
     }
 
     const handleQuantity = (product, tipo) => {
         dispatch(changeProductQuantity({...product, tipo}))
     }
+
     return (
         <Container>
             <Navbar/>

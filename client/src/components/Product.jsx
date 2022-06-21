@@ -71,7 +71,6 @@ const Icon = styled.div`
 const Product = ({item}) => {
 
     const id = item._id;
-    console.log(id);
     const quantity = 1;
     const [product, setProduct] = useState({});
     const dispatch = useDispatch();
@@ -86,8 +85,6 @@ const Product = ({item}) => {
         };
         getProduct();
     }, [id]);
-
-    console.log(product)
 
     const handleCartClick = () => {
         dispatch(addProduct({...product, quantity}));

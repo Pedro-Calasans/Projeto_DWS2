@@ -5,7 +5,7 @@ import {userRequest} from "../requestMethods";
 
 const Success = () => {
     const location = useLocation();
-    //in Cart.jsx I sent data and cart. Please check that page for the changes.(in video it's only data)
+    //in Cart.jsx I sent data and cart. Please check that page for the changes.
     const data = location.state.stripeData;
     const trans = location.state.cart;
     const currentUser = useSelector((state) => state.user.currentUser);
