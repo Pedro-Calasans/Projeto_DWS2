@@ -99,7 +99,6 @@ const Navbar = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         if (busca.trim()) {
-            console.log(busca)
             navigate("/search", {
                 state: {busca: busca},
             });

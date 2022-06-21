@@ -14,6 +14,8 @@ const SearchProducts = ({busca}) => {
 
     const [products, setProducts] = useState([]);
 
+    const buscaComp = busca.toLowerCase().trim();
+
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -27,12 +29,12 @@ const SearchProducts = ({busca}) => {
 
     let produtosFiltrados = '';
 
-    if(!busca) {
+    if(!buscaComp) {
         produtosFiltrados = products;
     } else {
         produtosFiltrados = products.filter((produto) => {
-            const nomeProduto = produto.tittle.toLowerCase();
-            return nomeProduto.includes(busca)
+            const nomeProduto = produto.tittle.toLowerCase().trim();
+            return nomeProduto.includes(buscaComp)
         });
     }
 

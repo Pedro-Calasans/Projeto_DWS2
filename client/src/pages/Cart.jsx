@@ -220,7 +220,7 @@ function Cart() {
                                                 <b>Descrição: {product.desc}</b>
                                             </ProductId>
                                             <ProductId>
-                                                <b>ID: {product._id}</b>
+                                                <b>Fabricante: {product.brand}</b>
                                             </ProductId>
                                         </Details>
                                     </ProductDetail>
