@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {publicRequest} from "../requestMethods";
 import {addProduct} from "../redux/cartRedux";
+import {addWhislistProduct} from "../redux/whislistRedux";
 
 const Info = styled.div`
   opacity: 0;
@@ -32,6 +33,7 @@ const Container = styled.div`
   justify-content: center;
   background-color: #f7f7f7;
   position: relative;
+
   &:hover ${Info} {
     opacity: 1;
   }
@@ -59,6 +61,7 @@ const Icon = styled.div`
   justify-content: center;
   margin: 10px;
   transition: all 0.5s ease;
+
   &:hover {
     background-color: #e9f5f5;
     transform: scale(1.1);
@@ -86,8 +89,12 @@ const Product = ({item}) => {
 
     console.log(product)
 
-    const handleClick = () => {
+    const handleCartClick = () => {
         dispatch(addProduct({...product, quantity}));
+    }
+
+    const handleWhislistClick = () => {
+        dispatch(addWhislistProduct({...product}));
     }
 
     return (
@@ -96,7 +103,7 @@ const Product = ({item}) => {
             <Image src={item.img}/>
             <Info>
                 <Icon>
-                    <ShoppingCartOutlined onClick={() => handleClick()}/>
+                    <ShoppingCartOutlined onClick={() => handleCartClick()}/>
                 </Icon>
                 <Icon>
                     <Link to={`/product/${item._id}`}>
@@ -104,7 +111,7 @@ const Product = ({item}) => {
                     </Link>
                 </Icon>
                 <Icon>
-                    <FavoriteBorderOutlined/>
+                    <FavoriteBorderOutlined onClick={() => handleWhislistClick()}/>
                 </Icon>
             </Info>
         </Container>

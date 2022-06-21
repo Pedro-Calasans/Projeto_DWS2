@@ -24,7 +24,7 @@ const cartSlice = createSlice({
                 state.productsValue += action.payload.price * action.payload.quantity;
             }
 
-            if(state.productsValue >= 200) state.discount = state.productsValue * 0.05;
+            if (state.productsValue >= 200) state.discount = state.productsValue * 0.05;
 
             state.shipping = Math.round(state.productsValue * 0.02);
             state.total = state.productsValue + state.shipping - state.discount;
@@ -35,7 +35,7 @@ const cartSlice = createSlice({
             state.quantity -= 1;
             state.shipping = Math.round(state.productsValue * 0.02);
 
-            if(state.productsValue < 200) state.discount = 0;
+            if (state.productsValue < 200) state.discount = 0;
 
             state.total = state.productsValue + state.shipping - state.discount;
         },
@@ -55,14 +55,15 @@ const cartSlice = createSlice({
                 state.products.find((product) => product._id === action.payload._id).quantity = quantity - 1;
                 state.productsValue -= action.payload.price;
 
-            } else if (action.payload.tipo === "inc") {state.total = state.productsValue + state.shipping;
+            } else if (action.payload.tipo === "inc") {
+                state.total = state.productsValue + state.shipping;
                 state.products.find((product) => product._id === action.payload._id).quantity = quantity + 1;
                 state.productsValue += action.payload.price;
             }
 
-            if(state.productsValue >= 200){
+            if (state.productsValue >= 200) {
                 state.discount = state.productsValue * 0.05;
-            } else  state.discount = 0;
+            } else state.discount = 0;
 
             state.shipping = Math.round(state.productsValue * 0.02);
             state.total = state.productsValue + state.shipping - state.discount;

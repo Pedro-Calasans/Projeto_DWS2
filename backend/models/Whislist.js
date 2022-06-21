@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
 
-const CarttSchema = new mongoose.Schema(
+const WhislistSchema = new mongoose.Schema(
     {
         userId: {type: String, required: true, unique: true},
         products: [
             {
                 productId: {type: String},
-                quantity: {type: Number, default: 1}
             }
         ],
     },
     {timestamps: true}
 )
 
-module.exports = mongoose.model("Cart", CarttSchema);
+module.exports = mongoose.model("Whislist", WhislistSchema);

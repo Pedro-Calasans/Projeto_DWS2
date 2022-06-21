@@ -1,4 +1,4 @@
-const Cart = require("../models/Cart");
+const Whislist = require("../models/Whislist");
 const {route} = require("./Auth");
 const {verifyTokenAndAuthorization, verifyTokenAndAdmin} = require("./verifyToken");
 
@@ -8,9 +8,9 @@ const {verifyToken} = require("express").Router;
 //CREATE
 
 router.post("/", async (req, res) => {
-    const newCart = new Cart(req.body)
+    const newWhislist = new Whislist(req.body)
     try {
-        const savedCart = await newCart.save();
+        const savedWhislist = await newWhislist.save();
         res.status(200).json(err);
     } catch (err) {
         res.status(500).json(err);
@@ -20,14 +20,14 @@ router.post("/", async (req, res) => {
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const updateCart = await Cart.findByIdAndUpdate(
+        const updateWhislist = await Whislist.findByIdAndUpdate(
             req.params.id,
             {
                 $set: req.body,
             },
             {new: true}
         );
-        res.status(200).json(updateCart);
+        res.status(200).json(updateWhislist);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -36,28 +36,28 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 //delete
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        await Cart.findByIdAndDelete(req.params.id);
-        res.status(200).json("Carrinho foi deletado");
+        await Whislist.findByIdAndDelete(req.params.id);
+        res.status(200).json("Lista de desejaos foi deletada");
     } catch (err) {
         res.status(500).json(err);
     }
 })
 
-//GET USER CART
+//GET USER WHISLIST
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const cart = await Cart.findOne({userId: req.params.userId});
-        res.status(200).json(cart);
+        const whislist = await Whislist.findOne({userId: req.params.userId});
+        res.status(200).json(whislist);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(whislist);
     }
 });
 
 //GET ALL
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const carts = await Cart.find();
-        res.status(200).json(carts);
+        const whislists = await Whislist.find();
+        res.status(200).json(whislists);
     } catch (err) {
         res.status(500).json(err);
     }

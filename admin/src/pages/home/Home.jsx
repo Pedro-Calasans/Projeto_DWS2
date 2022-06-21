@@ -3,53 +3,53 @@ import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
-import { useEffect, useMemo, useState } from "react";
-import { userRequest } from "../../requestMethods";
+import {useEffect, useMemo, useState} from "react";
+import {userRequest} from "../../requestMethods";
 
 export default function Home() {
-  const [userStats,setUserStats] = useState([])
-  const MONTHS = useMemo(
-    () =>[
-      "Jan",
-      "Feb",
-      "Mar",
-      "Abr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Ago",
-      "Set",
-      "Out",
-      "Nov",
-      "Dez"
-    ],
-    []
-  )
-  useEffect(() => {
-    const getStats = async () => {
-      try {
-        const res = await userRequest.get("/users/stats");
-        res.data.map((item) =>
-          setUserStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id - 1], "Atividade dos usuários": item.total },
-          ])
-        );
-      } catch {}
-    };
-    getStats();
-  }, [MONTHS]);
+    const [userStats, setUserStats] = useState([])
+    const MONTHS = useMemo(
+        () => [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Abr",
+            "Mai",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Set",
+            "Out",
+            "Nov",
+            "Dez"
+        ],
+        []
+    )
+    useEffect(() => {
+        const getStats = async () => {
+            try {
+                const res = await userRequest.get("/users/stats");
+                res.data.map((item) =>
+                    setUserStats((prev) => [
+                        ...prev,
+                        {name: MONTHS[item._id - 1], "Atividade dos usuários": item.total},
+                    ])
+                );
+            } catch {
+            }
+        };
+        getStats();
+    }, [MONTHS]);
 
 
-
-  return (
-    <div className="home">
-      <FeaturedInfo />
-      <Chart data={userStats} title="Análise de usuários" grid dataKey="Atividade dos usuários"/>
-      <div className="homeWidgets">
-        <WidgetSm/>
-        <WidgetLg/>
-      </div>
-    </div>
-  );
+    return (
+        <div className="home">
+            <FeaturedInfo/>
+            <Chart data={userStats} title="Análise de usuários" grid dataKey="Atividade dos usuários"/>
+            <div className="homeWidgets">
+                <WidgetSm/>
+                <WidgetLg/>
+            </div>
+        </div>
+    );
 }
