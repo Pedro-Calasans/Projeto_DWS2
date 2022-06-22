@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addUser} from "../redux/apiCalls";
 import {useNavigate} from 'react-router-dom';
 
@@ -69,10 +69,9 @@ const Register = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        addUser(inputs, dispatch);
-        alert("Conta criada com sucesso!");
-        navigate("/");
+        addUser(inputs, dispatch, navigate);
     }
+
 
     return (
         <Container>

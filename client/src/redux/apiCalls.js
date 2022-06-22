@@ -12,15 +12,20 @@ export const login = async (dispatch, user) => {
 };
 
 //add Users
-export const addUser = async (user, dispatch) => {
+export const addUser = async (user, dispatch, navigate) => {
     dispatch(addUserStart());
     try {
         const res = await publicRequest.post(`/auth/register`, user);
         dispatch(addUserSuccess(res.data));
+        alert("Usuário cadastrado com sucesso");
+        navigate("/");
     } catch (err) {
         dispatch(addUserFailure());
-        console.log(err.response.data)
+        if(err.response.data.code === 11000 && err.response.data.keyValue.email === user.email) alert("E-mail já cadastrado");
+        else if (err.response.data.code === 11000 && err.response.data.keyValue.username === user.username) alert("Nome de usuário indisponível");
     }
+
 };
+
 
 
