@@ -42,26 +42,6 @@ const Center = styled.div`
   align-items: center;
 `;
 
-const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  width: 90%;
-  padding: 5px;
-  background-color: white;
-  border-radius: 10px;
-  ${mobile({width: "80%"})}
-`;
-
-const Input = styled.input`
-  border: none;
-  margin: auto;
-  // width: 100%;
-  ${mobile({width: "80%"})}
-`;
-
 const Right = styled.div`
   margin-right: 10px;
   flex: 1;

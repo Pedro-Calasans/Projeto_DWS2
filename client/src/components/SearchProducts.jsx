@@ -2,12 +2,25 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import axios from "axios";
+import {mobile} from "../responsive";
 
 const Container = styled.div`
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+`;
+
+const EmptyCart = styled.div`
+  border: 0.5px solid lightgray;
+  padding: 100px;
+  text-align: center;
+  margin: 50px 300px;
+`;
+
+const Wrapper = styled.div`
+  padding: 20px;
+  ${mobile({padding: "10px"})}
 `;
 
 const SearchProducts = ({busca}) => {
@@ -29,7 +42,7 @@ const SearchProducts = ({busca}) => {
 
     let produtosFiltrados = '';
 
-    if(!buscaComp) {
+    if (!buscaComp) {
         produtosFiltrados = products;
     } else {
         produtosFiltrados = products.filter((produto) => {
@@ -40,7 +53,19 @@ const SearchProducts = ({busca}) => {
 
     return (
         <Container>
-            {produtosFiltrados.slice(0, produtosFiltrados.length).map((item) => <Product item={item} key={item.id}/>)}
+            {produtosFiltrados.length ? (
+                produtosFiltrados.slice(0, produtosFiltrados.length).map((item) =>
+                    <Product item={item} key={item.id}/>)
+            ) : (<Wrapper>
+                    <EmptyCart>
+                        <h1>
+                            Sua busca não encontrou nenhum produto
+                        </h1>
+                        <p>
+                            Volte para página inicial ou faça uma nova busca
+                        </p>
+                    </EmptyCart>
+                </Wrapper>)}
         </Container>
     );
 };
