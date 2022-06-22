@@ -1,8 +1,8 @@
 import {FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined} from "@material-ui/icons";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {publicRequest} from "../requestMethods";
 import {addProduct} from "../redux/cartRedux";
 import {addWhislistProduct} from "../redux/whislistRedux";
@@ -74,6 +74,8 @@ const Product = ({item}) => {
     const quantity = 1;
     const [product, setProduct] = useState({});
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.currentUser);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getProduct = async () => {
@@ -91,7 +93,8 @@ const Product = ({item}) => {
     }
 
     const handleWhislistClick = () => {
-        dispatch(addWhislistProduct({...product}));
+        if(user) dispatch(addWhislistProduct({...product}));
+        else navigate("/login");
     }
 
     return (

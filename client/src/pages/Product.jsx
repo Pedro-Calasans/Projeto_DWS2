@@ -6,10 +6,10 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import {mobile} from "../responsive";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {publicRequest} from "../requestMethods";
 import {addProduct} from "../redux/cartRedux";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addWhislistProduct} from "../redux/whislistRedux";
 
 
@@ -102,6 +102,8 @@ const Product = () => {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.currentUser);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getProduct = async () => {
@@ -128,7 +130,8 @@ const Product = () => {
     }
 
     const handleWhislistClick = () => {
-        dispatch(addWhislistProduct({...product}));
+        if (user) dispatch(addWhislistProduct({...product}));
+        else navigate("/login");
     }
 
     return (
