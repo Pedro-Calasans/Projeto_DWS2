@@ -25,9 +25,15 @@ const whislistSlice = createSlice({
             state.products = [];
             state.quantity = 0;
         },
+        createWhislistStart: () => {
+        },
+        createWhislistSuccess: () => {
+        },
+        createWhislistFailure: () => {
+        },
 
     },
 });
 
-export const {addWhislistProduct, removeWhislistProduct, cleanWhislist} = whislistSlice.actions;
+export const {addWhislistProduct, removeWhislistProduct, cleanWhislist, createWhislistFailure, createWhislistSuccess, createWhislistStart} = whislistSlice.actions;
 export default whislistSlice.reducer;

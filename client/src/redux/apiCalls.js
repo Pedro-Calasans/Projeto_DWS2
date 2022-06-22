@@ -1,5 +1,6 @@
 import {addUserFailure, addUserStart, addUserSuccess, loginFailure, loginStart, loginSucess,} from "./userRedux";
-import {publicRequest} from "../requestMethods";
+import {createWhislistStart, createWhislistSuccess, createWhislistFailure} from "./whislistRedux";
+import {publicRequest, userRequest} from "../requestMethods";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
@@ -18,6 +19,8 @@ export const addUser = async (user, dispatch, navigate) => {
         const res = await publicRequest.post(`/auth/register`, user);
         dispatch(addUserSuccess(res.data));
         alert("Usuário cadastrado com sucesso");
+        await login(dispatch, user);
+        await createWhislist(user, dispatch);
         navigate("/");
     } catch (err) {
         dispatch(addUserFailure());
@@ -26,6 +29,21 @@ export const addUser = async (user, dispatch, navigate) => {
     }
 
 };
+
+const createWhislist = async (user, dispatch) => {
+
+    dispatch(createWhislistStart());
+    try{
+        await userRequest.post("/whislists", {
+            userId: user.username,
+            products: [],
+        });
+        dispatch(createWhislistSuccess())
+    } catch (err) {
+        dispatch(createWhislistFailure())
+    }
+
+}
 
 
 

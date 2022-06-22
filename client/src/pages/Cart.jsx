@@ -160,7 +160,7 @@ function Cart() {
     const user = useSelector((state) => state.user.currentUser);
 
     const dispatch = useDispatch();
-    useEffect((cart) => {
+    useEffect(() => {
         const makeRequest = async () => {
             try {
                 const res = await userRequest.post("/checkout/payment", {
